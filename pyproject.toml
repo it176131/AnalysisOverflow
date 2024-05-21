@@ -36,5 +36,14 @@ dev = [
     "black",
     "flake8",
     "mypy",
+    "pandas-stubs",
     "pytest",
+]
+
+[tool.black]
+line-length = 79
+
+[tool.mypy]
+overrides = [
+    {module = "stackapi.*", ignore_missing_imports = true}
 ]
