@@ -30,3 +30,11 @@ classifiers = [
 [project.urls]
 Repository = "https://github.com/it176131/AnalysisOverflow"
 Issues = "https://github.com/it176131/AnalysisOverflow/issues"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "mypy",
+    "pytest",
+]
