@@ -11,3 +11,9 @@ dependencies = [
     "StackAPI>=0.3.0",
 ]
 requires-python = ">= 3.11"
+authors = [
+    {name = "Ian Thompson"},
+]
+maintainers = [
+    {name = "Ian Thompson"},
+]
