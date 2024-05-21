@@ -17,3 +17,5 @@ authors = [
 maintainers = [
     {name = "Ian Thompson"},
 ]
+description = "Tools for analyazing all things Stack Overflow!"
+readme = "README.md"
