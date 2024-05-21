@@ -1,7 +1,7 @@
 # 3rd party
-from stackapi.stackapi import StackAPIError
 import pandas as pd
 import pytest
+from stackapi.stackapi import StackAPIError
 
 # application specific
 from analysis_overflow.stackoverflow import StackOverflow

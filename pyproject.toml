@@ -47,3 +47,6 @@ line-length = 79
 overrides = [
     {module = "stackapi.*", ignore_missing_imports = true}
 ]
+
+[tool.isort]
+profile = "black"
