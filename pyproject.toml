@@ -19,3 +19,4 @@ maintainers = [
 ]
 description = "Tools for analyazing all things Stack Overflow!"
 readme = "README.md"
+keywords = ["stack", "overflow", "analysis"]
