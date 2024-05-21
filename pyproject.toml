@@ -1,3 +1,6 @@
 [build-system]
 requires = ["setuptools >= 69.5.1", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["version"]
