@@ -5,7 +5,7 @@ from os import getenv
 from stackapi import StackAPI
 
 # application specific
-from analysis_overflow.utils import check_user_ids
+from src.analysis_overflow.utils import check_user_ids
 
 
 class StackOverflow(StackAPI):
