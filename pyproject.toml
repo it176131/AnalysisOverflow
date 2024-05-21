@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools >= 69.5.1", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dynamic = ["version"]
+name = "AnalysisOverflow"
+dependencies = [
+    "mlxtend>=0.23.1",
+    "pandas>=2.2.2",
+    "StackAPI>=0.3.0",
+]
+requires-python = ">= 3.11"
+authors = [
+    {name = "Ian Thompson"},
+]
+maintainers = [
+    {name = "Ian Thompson"},
+]
+description = "Tools for analyazing all things Stack Overflow!"
+readme = "README.md"
+keywords = ["stack", "overflow", "analysis"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Readers of it176131.github.io",
+    "Topic :: Data Analysis :: Tools",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+[project.urls]
+Repository = "https://github.com/it176131/AnalysisOverflow"
+Issues = "https://github.com/it176131/AnalysisOverflow/issues"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "mypy",
+    "pandas-stubs",
+    "pytest",
+]
+
+[tool.black]
+line-length = 79
+
+[tool.mypy]
+overrides = [
+    {module = "stackapi.*", ignore_missing_imports = true}
+]
+
+[tool.isort]
+profile = "black"

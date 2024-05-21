@@ -13,10 +13,11 @@ def ref():
 
 @pytest.mark.parametrize(
     "user_ids,expected",
-    [(None, [1]), ([1], [1]), ([2], [2]), ([2, 3], [2, 3])]
+    [(None, [1]), ([1], [1]), ([2], [2]), ([2, 3], [2, 3])],
 )
-def test_check_user_ids(ref: StackOverflow, user_ids: list[int] | None,
-                        expected: list[int]):
+def test_check_user_ids(
+    ref: StackOverflow, user_ids: list[int] | None, expected: list[int]
+):
     @utils.check_user_ids
     def to_be_decorated(ref, user_ids):
         assert user_ids == expected

@@ -1,5 +1,6 @@
 # standard
 from os import getenv
+from typing import Any
 
 # 3rd party
 from stackapi import StackAPI
@@ -25,17 +26,28 @@ class StackOverflow(StackAPI):
         and a user, to grant more permissions (such as write access)
     """
 
-    def __init__(self, user_id: int, version: str = "2.2", max_pages: int = 5,
-                 page_size: int = 100, key: str | None = None,
-                 access_token: str | None = None):
+    def __init__(
+        self,
+        user_id: int,
+        version: str = "2.2",
+        max_pages: int = 5,
+        page_size: int = 100,
+        key: str | None = None,
+        access_token: str | None = None,
+    ):
         self._user_id = user_id
 
         if key is None:
             key = self._get_key()
 
-        super().__init__(name="stackoverflow", version=version,
-                         max_pages=max_pages, page_size=page_size, key=key,
-                         access_token=access_token)
+        super().__init__(
+            name="stackoverflow",
+            version=version,
+            max_pages=max_pages,
+            page_size=page_size,
+            key=key,
+            access_token=access_token,
+        )
         self._quota_remaining: int | None = None
 
     @staticmethod
@@ -74,20 +86,25 @@ class StackOverflow(StackAPI):
         """Set the User's Stack Overflow ID after instantiation."""
         self._user_id = user_id
 
-    def fetch(self, endpoint: str | None = None, page: int = 1,
-              key: str | None = None, filter: str = 'default',
-              **kwargs) -> dict[str, ...]:
+    def fetch(
+        self,
+        endpoint: str | None = None,
+        page: int = 1,
+        key: str | None = None,
+        filter: str = "default",
+        **kwargs,
+    ) -> dict[str, Any]:
         super().fetch.__doc__
-        results = super().fetch(endpoint=endpoint, page=page, key=key,
-                                filter=filter, **kwargs)
+        results = super().fetch(
+            endpoint=endpoint, page=page, key=key, filter=filter, **kwargs
+        )
         self._quota_remaining = results.get("quota_remaining")
         return results
 
     @check_user_ids
     def fetch_user_answers(
-            self,
-            user_ids: list[int] | None = None
-    ) -> dict[str, ...]:
+        self, user_ids: list[int] | None = None
+    ) -> dict[str, Any]:
         """
         Get the answers posted by the users identified by a set of ids.
 
@@ -103,7 +120,7 @@ class StackOverflow(StackAPI):
         user_answers = self.fetch(endpoint=endpoint, ids=user_ids)
         return user_answers
 
-    def fetch_questions(self, question_ids: list[int]) -> dict[str, ...]:
+    def fetch_questions(self, question_ids: list[int]) -> dict[str, Any]:
         """
         Get the questions identified by a set of ids.
 
@@ -119,9 +136,8 @@ class StackOverflow(StackAPI):
 
     @check_user_ids
     def fetch_user_reputation_history(
-            self,
-            user_ids: list[int] | None = None
-    ) -> dict[str, ...]:
+        self, user_ids: list[int] | None = None
+    ) -> dict[str, Any]:
         """
         Get a history of a user's reputation, excluding private events.
 
@@ -136,7 +152,7 @@ class StackOverflow(StackAPI):
         user_rep_history = self.fetch(endpoint=endpoint, ids=user_ids)
         return user_rep_history
 
-    def fetch_badge_recipients(self, badge_ids: list[int]) -> dict[str, ...]:
+    def fetch_badge_recipients(self, badge_ids: list[int]) -> dict[str, Any]:
         """
         Get the recent recipients of the given badges.
 

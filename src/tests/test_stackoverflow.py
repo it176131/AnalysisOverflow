@@ -1,7 +1,7 @@
 # 3rd party
-from stackapi.stackapi import StackAPIError
 import pandas as pd
 import pytest
+from stackapi.stackapi import StackAPIError
 
 # application specific
 from analysis_overflow.stackoverflow import StackOverflow
@@ -32,8 +32,9 @@ def test_user_id(user_id1: int = 1, user_id2: int = 2):
     assert user_id2 == so.user_id
 
 
-@pytest.mark.parametrize(argnames="endpoint",
-                         argvalues=[None, "test", "users"])
+@pytest.mark.parametrize(
+    argnames="endpoint", argvalues=[None, "test", "users"]
+)
 def test_fetch(so: StackOverflow, endpoint: str | None):
     if endpoint is None:
         with pytest.raises(ValueError):
@@ -46,7 +47,7 @@ def test_fetch(so: StackOverflow, endpoint: str | None):
     else:
         results = so.fetch(endpoint=endpoint)
         assert isinstance(results, dict)
-        items = results.get("items")
+        items: list = results["items"]
         assert len(items) <= so.max_pages * so.page_size
 
 
@@ -60,14 +61,16 @@ def test_fetch_user_answers(so: StackOverflow, user_ids: list[int] | None):
     owner_df = pd.DataFrame(owner_series)
 
     if user_ids is None:
-        assert owner_df["user_id"].eq(so.user_id).all()
+        user_id: int = getattr(so, "user_id")
+        assert owner_df["user_id"].eq(user_id).all()
 
     else:
         assert owner_df["user_id"].isin(user_ids).all()
 
 
-@pytest.mark.parametrize(argnames="question_ids",
-                         argvalues=[None, [1], [60325792]])
+@pytest.mark.parametrize(
+    argnames="question_ids", argvalues=[None, [1], [60325792]]
+)
 def test_fetch_questions(so: StackOverflow, question_ids: list[int]):
     if question_ids is None:
         with pytest.raises(StackAPIError):
@@ -85,8 +88,9 @@ def test_fetch_questions(so: StackOverflow, question_ids: list[int]):
 
 
 @pytest.mark.parametrize(argnames="user_ids", argvalues=[None, [1], [2, 3]])
-def test_fetch_user_reputation_history(so: StackOverflow,
-                                       user_ids: list[int] | None):
+def test_fetch_user_reputation_history(
+    so: StackOverflow, user_ids: list[int] | None
+):
     user_rep_history = so.fetch_user_reputation_history(user_ids=user_ids)
     assert isinstance(user_rep_history, dict)
     items = user_rep_history.get("items")
@@ -94,14 +98,16 @@ def test_fetch_user_reputation_history(so: StackOverflow,
     user_id_series = df["user_id"]
 
     if user_ids is None:
-        assert user_id_series.eq(so.user_id).all()
+        user_id = getattr(so, "user_id")
+        assert user_id_series.eq(user_id).all()
 
     else:
         assert user_id_series.isin(user_ids).all()
 
 
-@pytest.mark.parametrize(argnames="badge_ids",
-                         argvalues=[None, [267], [50, 51]])
+@pytest.mark.parametrize(
+    argnames="badge_ids", argvalues=[None, [267], [50, 51]]
+)
 def test_fetch_badge_recipients(so: StackOverflow, badge_ids: list[int]):
     if badge_ids is None:
         with pytest.raises(StackAPIError):
