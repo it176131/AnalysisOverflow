@@ -26,45 +26,32 @@ class StackOverflow(StackAPI):
         and a user, to grant more permissions (such as write access)
     """
 
-    def __init__(
-        self,
-        user_id: int,
-        version: str = "2.2",
-        max_pages: int = 5,
-        page_size: int = 100,
-        key: str | None = None,
-        access_token: str | None = None,
-    ):
+    def __init__(self, user_id: int, **kwargs):
         self._user_id = user_id
 
-        if key is None:
-            key = self._get_key()
+        if kwargs.get("key") is None:
+            kwargs["key"] = self._get_key()
 
-        super().__init__(
-            name="stackoverflow",
-            version=version,
-            max_pages=max_pages,
-            page_size=page_size,
-            key=key,
-            access_token=access_token,
-        )
+        super().__init__(name="stackoverflow", **kwargs)
         self._quota_remaining: int | None = None
 
     @staticmethod
     def _get_key() -> str | None:
         """
-        Attempt to get the API key from the user's environment
-        variables.
+        Get the API key from the user's environment variables.
+
+        API key should be stored with the variable name
+        "STACK_API_KEY". If no API key, return ``None``.
 
         :returns: api_key
         """
-        api_key = getenv(key="stackapi_key")
+        api_key = getenv(key="STACK_API_KEY")
         return api_key
 
     @property
     def quota_remaining(self) -> int | None:
         """
-        Return the remaining quota if available
+        Return the remaining quota if available.
 
         :return: remaining_quota
         """
@@ -72,17 +59,17 @@ class StackOverflow(StackAPI):
         return remaining_quota
 
     @property
-    def user_id(self) -> int | None:
+    def user_id(self) -> int:
         """
-        Return the User's ID if available.
+        Return the User's ID.
 
-        :return:
+        :return: user_id
         """
         user_id = self._user_id
         return user_id
 
     @user_id.setter
-    def user_id(self, user_id) -> None:
+    def user_id(self, user_id: int) -> None:
         """Set the User's Stack Overflow ID after instantiation."""
         self._user_id = user_id
 
@@ -109,8 +96,7 @@ class StackOverflow(StackAPI):
         Get the answers posted by the users identified by a set of ids.
 
         Reference:
-        ["users/{ids}/answers"](
-        https://api.stackexchange.com/docs/answers-on-users)
+        https://api.stackexchange.com/docs/answers-on-users
 
         :param user_ids: user-ids of interest. If left as `None`, will use
             `self.user_id`
@@ -125,7 +111,7 @@ class StackOverflow(StackAPI):
         Get the questions identified by a set of ids.
 
         Reference:
-        ["questions/{ids}"](https://api.stackexchange.com/docs/questions-by-ids)
+        https://api.stackexchange.com/docs/questions-by-ids
 
         :param question_ids: IDs of questions
         :returns: questions
@@ -142,10 +128,10 @@ class StackOverflow(StackAPI):
         Get a history of a user's reputation, excluding private events.
 
         Reference:
-        ["users/{ids}/reputation-history"](https://api.stackexchange.com/docs/reputation-history)
+        https://api.stackexchange.com/docs/reputation-history
 
-        :user_ids: user IDs of interest. If left as `None`, will use
-            `self.user_id`
+        :param user_ids: User IDs of interest.
+            If left as `None`, will use ``self.user_id``
         :return: user_rep_history
         """
         endpoint = "users/{ids}/reputation-history"
@@ -157,9 +143,9 @@ class StackOverflow(StackAPI):
         Get the recent recipients of the given badges.
 
         Reference:
-        ["badges/{ids}/recipients"](https://api.stackexchange.com/docs/badge-recipients-by-ids)
+        https://api.stackexchange.com/docs/badge-recipients-by-ids
 
-        :param badge_ids: badge IDs of interest
+        :param badge_ids: Badge IDs of interest.
         :return: badge_recipients
         """
         endpoint = "badges/{ids}/recipients"
