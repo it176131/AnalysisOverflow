@@ -51,7 +51,7 @@ class StackOverflow(StackAPI):
     @property
     def quota_remaining(self) -> int | None:
         """
-        Return the remaining quota if available
+        Return the remaining quota if available.
 
         :return: remaining_quota
         """
