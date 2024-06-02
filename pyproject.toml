@@ -37,6 +37,7 @@ dev = [
     "flake8",
     "mypy",
     "pandas-stubs",
+    "pip install pre-commit",
     "pytest",
 ]
 
