@@ -57,7 +57,7 @@ class StackOverflow(StackAPI):
         return remaining_quota
 
     @property
-    def user_id(self) -> int | None:
+    def user_id(self) -> int:
         """
         Return the User's ID if available.
 
