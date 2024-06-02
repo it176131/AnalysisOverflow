@@ -39,7 +39,12 @@ dev = [
     "pandas-stubs",
     "pip install pre-commit",
     "pytest",
+    "ruff",
 ]
+
+[tool.ruff]
+line-length = 79
+tab-size = 4
 
 [tool.black]
 line-length = 79
