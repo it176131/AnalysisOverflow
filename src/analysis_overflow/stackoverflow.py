@@ -128,10 +128,10 @@ class StackOverflow(StackAPI):
         Get a history of a user's reputation, excluding private events.
 
         Reference:
-        ["users/{ids}/reputation-history"](https://api.stackexchange.com/docs/reputation-history)
+        https://api.stackexchange.com/docs/reputation-history
 
-        :user_ids: user IDs of interest. If left as `None`, will use
-            `self.user_id`
+        :param user_ids: User IDs of interest.
+            If left as `None`, will use ``self.user_id``
         :return: user_rep_history
         """
         endpoint = "users/{ids}/reputation-history"
