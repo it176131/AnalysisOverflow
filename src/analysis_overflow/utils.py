@@ -3,7 +3,7 @@ from functools import wraps
 
 def check_user_ids(method):
     """
-    Decorator function that sets `ids` to the User's ID if not included.
+    Decorator that sets ``ids`` to the User's ID if not included.
     """
 
     @wraps(method)
