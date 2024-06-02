@@ -61,9 +61,9 @@ class StackOverflow(StackAPI):
     @property
     def user_id(self) -> int:
         """
-        Return the User's ID if available.
+        Return the User's ID.
 
-        :return:
+        :return: user_id
         """
         user_id = self._user_id
         return user_id
