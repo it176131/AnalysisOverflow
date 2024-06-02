@@ -67,7 +67,7 @@ class StackOverflow(StackAPI):
         return user_id
 
     @user_id.setter
-    def user_id(self, user_id) -> None:
+    def user_id(self, user_id: int) -> None:
         """Set the User's Stack Overflow ID after instantiation."""
         self._user_id = user_id
 
@@ -94,8 +94,7 @@ class StackOverflow(StackAPI):
         Get the answers posted by the users identified by a set of ids.
 
         Reference:
-        ["users/{ids}/answers"](
-        https://api.stackexchange.com/docs/answers-on-users)
+        https://api.stackexchange.com/docs/answers-on-users
 
         :param user_ids: user-ids of interest. If left as `None`, will use
             `self.user_id`
