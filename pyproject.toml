@@ -35,6 +35,7 @@ Issues = "https://github.com/it176131/AnalysisOverflow/issues"
 dev = [
     "black",
     "flake8",
+    "isort",
     "mypy",
     "pandas-stubs",
     "pip install pre-commit",
