@@ -26,28 +26,13 @@ class StackOverflow(StackAPI):
         and a user, to grant more permissions (such as write access)
     """
 
-    def __init__(
-        self,
-        user_id: int,
-        version: str = "2.2",
-        max_pages: int = 5,
-        page_size: int = 100,
-        key: str | None = None,
-        access_token: str | None = None,
-    ):
+    def __init__(self, user_id: int, **kwargs):
         self._user_id = user_id
 
-        if key is None:
-            key = self._get_key()
+        if kwargs.get("key") is None:
+            kwargs["key"] = self._get_key()
 
-        super().__init__(
-            name="stackoverflow",
-            version=version,
-            max_pages=max_pages,
-            page_size=page_size,
-            key=key,
-            access_token=access_token,
-        )
+        super().__init__(name="stackoverflow", **kwargs)
         self._quota_remaining: int | None = None
 
     @staticmethod
