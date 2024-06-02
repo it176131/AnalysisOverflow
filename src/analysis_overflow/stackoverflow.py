@@ -111,7 +111,7 @@ class StackOverflow(StackAPI):
         Get the questions identified by a set of ids.
 
         Reference:
-        ["questions/{ids}"](https://api.stackexchange.com/docs/questions-by-ids)
+        https://api.stackexchange.com/docs/questions-by-ids
 
         :param question_ids: IDs of questions
         :returns: questions
