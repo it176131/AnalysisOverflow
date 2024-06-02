@@ -143,9 +143,9 @@ class StackOverflow(StackAPI):
         Get the recent recipients of the given badges.
 
         Reference:
-        ["badges/{ids}/recipients"](https://api.stackexchange.com/docs/badge-recipients-by-ids)
+        https://api.stackexchange.com/docs/badge-recipients-by-ids
 
-        :param badge_ids: badge IDs of interest
+        :param badge_ids: Badge IDs of interest.
         :return: badge_recipients
         """
         endpoint = "badges/{ids}/recipients"
