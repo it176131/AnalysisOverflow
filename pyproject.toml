@@ -38,7 +38,7 @@ dev = [
     "isort",
     "mypy",
     "pandas-stubs",
-    "pip install pre-commit",
+    "pre-commit",
     "pytest",
     "ruff",
 ]
