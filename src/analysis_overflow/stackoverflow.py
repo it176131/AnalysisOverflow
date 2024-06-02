@@ -38,12 +38,14 @@ class StackOverflow(StackAPI):
     @staticmethod
     def _get_key() -> str | None:
         """
-        Attempt to get the API key from the user's environment
-        variables.
+        Get the API key from the user's environment variables.
+
+        API key should be stored with the variable name
+        "STACK_API_KEY". If no API key, return ``None``.
 
         :returns: api_key
         """
-        api_key = getenv(key="stackapi_key")
+        api_key = getenv(key="STACK_API_KEY")
         return api_key
 
     @property
