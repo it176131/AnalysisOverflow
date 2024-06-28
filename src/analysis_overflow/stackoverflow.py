@@ -1,11 +1,8 @@
-# standard
 from os import getenv
 from typing import Any
 
-# 3rd party
 from stackapi import StackAPI
 
-# application specific
 from analysis_overflow.utils import check_user_ids
 
 
