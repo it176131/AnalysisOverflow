@@ -34,8 +34,7 @@ class StackOverflow(StackAPI):
 
     @staticmethod
     def _get_key() -> str | None:
-        """
-        Get the API key from the user's environment variables.
+        """Get the API key from the user's environment variables.
 
         API key should be stored with the variable name
         "STACK_API_KEY". If no API key, return ``None``.
@@ -47,8 +46,7 @@ class StackOverflow(StackAPI):
 
     @property
     def quota_remaining(self) -> int | None:
-        """
-        Return the remaining quota if available.
+        """Return the remaining quota if available.
 
         :return: remaining_quota
         """
@@ -57,8 +55,7 @@ class StackOverflow(StackAPI):
 
     @property
     def user_id(self) -> int:
-        """
-        Return the User's ID.
+        """Return the User's ID.
 
         :return: user_id
         """
@@ -89,8 +86,7 @@ class StackOverflow(StackAPI):
     def fetch_user_answers(
         self, user_ids: list[int] | None = None
     ) -> dict[str, Any]:
-        """
-        Get the answers posted by the users identified by a set of ids.
+        """Get users' answer posts identified by a set of ids.
 
         Reference:
         https://api.stackexchange.com/docs/answers-on-users
@@ -104,8 +100,7 @@ class StackOverflow(StackAPI):
         return user_answers
 
     def fetch_questions(self, question_ids: list[int]) -> dict[str, Any]:
-        """
-        Get the questions identified by a set of ids.
+        """Get the questions identified by a set of ids.
 
         Reference:
         https://api.stackexchange.com/docs/questions-by-ids
@@ -121,8 +116,7 @@ class StackOverflow(StackAPI):
     def fetch_user_reputation_history(
         self, user_ids: list[int] | None = None
     ) -> dict[str, Any]:
-        """
-        Get a history of a user's reputation, excluding private events.
+        """Get history of a user's reputation, excluding private events.
 
         Reference:
         https://api.stackexchange.com/docs/reputation-history
@@ -136,8 +130,7 @@ class StackOverflow(StackAPI):
         return user_rep_history
 
     def fetch_badge_recipients(self, badge_ids: list[int]) -> dict[str, Any]:
-        """
-        Get the recent recipients of the given badges.
+        """Get the recent recipients of the given badges.
 
         Reference:
         https://api.stackexchange.com/docs/badge-recipients-by-ids
