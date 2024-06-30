@@ -96,18 +96,17 @@ class StackOverflow(StackAPI):
         key: str | None = None,
         filter: str = "default",
         **kwargs,
-    ) -> dict[str, Any]:
+    ) -> Result:
         super().fetch.__doc__
-        results = super().fetch(
+        data: dict[str, Any] = super().fetch(
             endpoint=endpoint, page=page, key=key, filter=filter, **kwargs
         )
-        self._quota_remaining = results.get("quota_remaining")
-        return results
+        result = Result(**data)
+        self._quota_remaining = result.quota_remaining
+        return result
 
     @check_user_ids
-    def fetch_user_answers(
-        self, user_ids: list[int] | None = None
-    ) -> dict[str, Any]:
+    def fetch_user_answers(self, user_ids: list[int] | None = None) -> Result:
         """Get users' answer posts identified by a set of ids.
 
         Reference:
@@ -121,7 +120,7 @@ class StackOverflow(StackAPI):
         user_answers = self.fetch(endpoint=endpoint, ids=user_ids)
         return user_answers
 
-    def fetch_questions(self, question_ids: list[int]) -> dict[str, Any]:
+    def fetch_questions(self, question_ids: list[int]) -> Result:
         """Get the questions identified by a set of ids.
 
         Reference:
@@ -137,7 +136,7 @@ class StackOverflow(StackAPI):
     @check_user_ids
     def fetch_user_reputation_history(
         self, user_ids: list[int] | None = None
-    ) -> dict[str, Any]:
+    ) -> Result:
         """Get history of a user's reputation, excluding private events.
 
         Reference:
@@ -151,7 +150,7 @@ class StackOverflow(StackAPI):
         user_rep_history = self.fetch(endpoint=endpoint, ids=user_ids)
         return user_rep_history
 
-    def fetch_badge_recipients(self, badge_ids: list[int]) -> dict[str, Any]:
+    def fetch_badge_recipients(self, badge_ids: list[int]) -> Result:
         """Get the recent recipients of the given badges.
 
         Reference:
