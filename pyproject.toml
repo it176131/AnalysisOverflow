@@ -45,7 +45,7 @@ dev = [
 
 [tool.ruff]
 line-length = 79
-tab-size = 4
+indent-width = 4
 
 [tool.black]
 line-length = 79
