@@ -1,3 +1,4 @@
+import asyncio
 from os import getenv
 from typing import Any
 
@@ -103,6 +104,14 @@ class StackOverflow(StackAPI):
         )
         result = Result(**data)
         self._quota_remaining = result.quota_remaining
+        return result
+
+    async def async_fetch(self, **kwargs) -> Result:
+        """Asynchronous ``fetch``.
+
+        See :method:``StackOverflow.fetch`` for a list of parameters.
+        """
+        result: Result = await asyncio.to_thread(self.fetch, **kwargs)
         return result
 
     @check_user_ids
