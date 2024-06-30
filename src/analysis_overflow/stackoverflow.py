@@ -1,9 +1,31 @@
 from os import getenv
 from typing import Any
 
+from pydantic.config import ConfigDict
+from pydantic.main import BaseModel
 from stackapi import StackAPI
 
 from analysis_overflow.utils import check_user_ids
+
+
+class Item(BaseModel):
+    """An item in :attribute:``Result.items``."""
+
+    model_config = ConfigDict(extra="allow")
+
+
+class Result(BaseModel):
+    """Result of an API call."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    backoff: int
+    has_more: bool
+    page: int
+    quota_max: int
+    quota_remaining: int
+    total: int
+    items: list[Item]
 
 
 class StackOverflow(StackAPI):
